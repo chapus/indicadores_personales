@@ -2,10 +2,37 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
+}
+
+model Indicador {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  published   Boolean  @default(false)
+  usuarios Usuario_indicador[]
+}
+
+model Usuario {
+  id          Int     @id @default(autoincrement())
+  email       String  @unique
+  name        String?
+  avatar      String?
+  telefono    String?
+  indicadores Usuario_indicador[]
+}
+
+model Usuario_indicador {
+  id          Int      @id @default(autoincrement())
+  indicador     Indicador?    @relation(fields: [indicadorId], references: [id])
+  indicadorId   Int?
+  usuario     Usuario?    @relation(fields: [usuarioId], references: [id])
+  usuarioId   Int?
 }

@@ -25,6 +25,10 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    {
+      src: '@/plugins/vue-ellipse-progress.js',
+      mode: 'client'
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -55,12 +59,19 @@ export default {
     '~/api/index.js'
   ],
 
+  server: {
+    host: '0.0.0.0'
+  },
+
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: false,
       themes: {
+        light: {
+          background: colors.indigo.base,
+        },
         dark: {
           primary: colors.blue.darken2,
           accent: colors.grey.darken3,

@@ -51,11 +51,15 @@ export default {
     baseURL: process.env.API_URL || 'http://localhost:3000/api'
   },
 
+  serverMiddleware: [
+    '~/api/index.js'
+  ],
+
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
